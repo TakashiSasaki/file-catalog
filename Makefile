@@ -44,3 +44,5 @@ filelist.txt:
 	cat $< | sort | uniq | ${FRCODE} >$@
 	test -s $@
 
+%.filelist: %.frcode
+	locate -d $< "" > $@

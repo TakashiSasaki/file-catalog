@@ -1,7 +1,10 @@
-rev-parse.txt
-filelist.txt
-ls-tree.txt
+*.filelist
+*.swp
 epoch.txt
+filelist.txt
 fileurl.txt
-path.txt
 hostname.txt
+ls-tree.txt
+path.txt
+rev-parse.txt
+*.frcode

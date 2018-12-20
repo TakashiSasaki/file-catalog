@@ -1,4 +1,4 @@
-all: ls-tree.txt
+all: ls-tree.txt filelist.txt
 
 clean:
 	rm -rf *.txt

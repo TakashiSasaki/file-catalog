@@ -11,15 +11,15 @@ epoch.txt:
 clean:
 	rm -rf *.txt
 
-path.txt:
+cd.txt:
 	(cd ..; pwd) | tr -d '\n\r\t' >$@
 	grep '^/' $@ 
 	test -s $@
 
-fileurl.txt:
+leading-part.txt: hostname.txt cd.txt
 	echo -n "file://" > $@
 	cat hostname.txt >>$@
-	cat path.txt >>$@
+	cat cd.txt >>$@
 	test -s $@
 
 hostname.txt:
@@ -36,14 +36,19 @@ ls-tree.txt: rev-parse.txt
 	cat $< | xargs -n 1 git -C .. ls-tree | tee  $@
 	test -s $@
 
-filelist.txt:
-	(cd ..; find .) | sed -r 's/^\.+\/+//' > $@
+relative-paths.txt:
+	(cd ..; find .) | sed -n -r 's/^\.+\/+//p' > $@
 	test -s $@
 	wc $@
 
-%.frcode: %.filelist
+file-urls.txt: leading-part.txt relative-paths.txt
+	cat relative-paths.txt | sed -n -r 's/^([^\/].+)$$/$(shell cat leading-part.txt)\/\1/p' >$@
+
+%.frcode: %.urllist
 	cat $< | sort | uniq | ${FRCODE} >$@
 	test -s $@
 
-%.filelist: %.frcode
+%.urllist: %.frcode
 	locate -d $< "" > $@
+
+

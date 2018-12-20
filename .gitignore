@@ -8,3 +8,6 @@ ls-tree.txt
 path.txt
 rev-parse.txt
 *.frcode
+cd.txt
+leading-part.txt
+relative-paths.txt

@@ -1,3 +1,7 @@
 rev-parse.txt
 filelist.txt
 ls-tree.txt
+epoch.txt
+fileurl.txt
+path.txt
+hostname.txt

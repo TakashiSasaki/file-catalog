@@ -37,8 +37,9 @@ ls-tree.txt: rev-parse.txt
 	test -s $@
 
 filelist.txt:
-	(cd ..; find .) | tee $@
+	(cd ..; find .) | sed -r 's/^\.+\/+//' > $@
 	test -s $@
+	wc $@
 
 %.frcode: %.filelist
 	cat $< | sort | uniq | ${FRCODE} >$@

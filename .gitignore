@@ -23,3 +23,5 @@ path.txt
 relative-paths.txt
 rev-parse.txt
 System*
+.vscode/
+

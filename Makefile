@@ -9,7 +9,7 @@ endif
 FILELIST=.${BRANCH}.filelist
 DIRLIST=.${BRANCH}.dirlist
 
-all: ${DIRLIST} ${FILELIST}
+all: ${DIRLIST} ${FILELIST} .${BRANCH}.githash
 	git add -f ${DIRLIST}
 	git add -f ${FILELIST}
 
@@ -44,3 +44,5 @@ new-branch:
 	find . -type f | sed -n -r 's/^.\/(.+)$$/\1/p' >$@
 	head $@; tail $@
 
+%.githash: %.filelist
+	cat $< | xargs -n 1 git hash-object 2>&1| tee $@

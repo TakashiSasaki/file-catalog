@@ -1,1 +1,12 @@
-*
+Anaconda3/
+$RECYCLE.BIN/
+PortableApps/
+Start.exe
+Autorun.inf
+*.swp
+*.dirlist
+*.filelist
+*.githash
+*.md5_8k
+Download/
+Documents/

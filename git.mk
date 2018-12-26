@@ -10,7 +10,9 @@ git-ls-tree.txt: git-rev-parse-all.githash
 	test -s $@
 
 git-config:
-	git config --system pager.reflog ""
-	git config --system pager.branch ""
-	git config --system pager.diff ""
+	git config pager.reflog ""
+	git config pager.branch ""
+	git config pager.diff ""
+	git config core.autocrlf false
+	git config core.filemode false
 

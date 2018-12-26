@@ -1,4 +1,6 @@
 .DELETE_ON_ERROR:
+.PHONY: all clean
+.SUFFIXES: .md5 .ldjson .json
 
 $(eval BRANCH=$(shell git symbolic-ref --short HEAD|sed -n -r '/^[0-9a-fA-F]{32}$$/p'))
 ifndef BRANCH
@@ -78,4 +80,13 @@ all.relpaths:
 all.fileurls: root.fileurl all.relpaths
 	cat $(lastword $^)| sed -n -r 's#^([^\/].+)$$#$(shell cat $(firstword $^))/\1#p' >$@
 	@tail $@
+
+cd.md5sum:
+	find . -type f| xargs md5sum >$@
+
+%.ldjson: %.md5sum
+	cat $< 	| jq -R -c 'split("  ")|{"md5":.[0],"path":.[1]}' >$@
+
+%.json: %.ldjson
+	cat $< | jq -s >$@
 

@@ -8,6 +8,8 @@ class Roots(dict):
     def add(self, rootPath: pathlib.Path):
         if isinstance(rootPath, str):
             rootPath = pathlib.Path(rootPath)
+        if not rootPath.is_absolute():
+            rootPath = rootPath.absolute()
         rootPathUrl = rootPath.as_uri()
         rootPathHash = computeGitHashUtf8(rootPathUrl)
         if self.get(rootPathHash) is None:

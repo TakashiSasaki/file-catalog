@@ -1,18 +1,13 @@
 .DELETE_ON_ERROR:
 
-<<<<<<< HEAD
 $(eval BRANCH=$(shell git symbolic-ref --short HEAD|sed -n -r '/^[0-9a-fA-F]{32}$$/p'))
 ifndef BRANCH
-  $(error Branch name should be 32 hex chars)
+  $(info Branch name is not 32 hex chars)
 else
   $(info BRANCH=${BRANCH})
 endif
 FILELIST=.${BRANCH}.filelist
 DIRLIST=.${BRANCH}.dirlist
-
-all: ${DIRLIST} ${FILELIST} .${BRANCH}.githash
-	git add -f ${DIRLIST}
-	git add -f ${FILELIST}
 
 ifndef OURS 
 #$(error OURS is not defined)
@@ -37,67 +32,50 @@ new-branch:
 	test ${md5_1} != ${md5_2}
 	git branch -m ${md5_1}
 
-%.dirlist:
+cd.dirs: 
 	find . -type d | sed -n -r 's/^.\/(.+)$$/\1/p' >$@
 	head $@; tail $@
 
-%.filelist:
+cd.files: 
 	find . -type f | sed -n -r 's/^.\/(.+)$$/\1/p' >$@
 	head $@; tail $@
 
-%.githash: %.filelist
-	cat $< | xargs -n 1 git hash-object 2>&1| tee $@
-=======
-FRCODE=/usr/libexec/frcode
-
-all: ls-tree.txt filelist.txt path.txt
 
 epoch.txt:
 	date +%s  | tr -d '\n\r\t'>$@
 	test -s $@
 
-clean:
-	rm -rf *.txt
-
-cd.txt:
-	(cd ..; pwd) | tr -d '\n\r\t' >$@
+cd.dir:
+	pwd | tr -d '\n\r\t' >$@
 	grep '^/' $@ 
 	test -s $@
 
-leading-part.txt: hostname.txt cd.txt
+root.fileurl: hostname.txt cd.dir
 	echo -n "file://" > $@
-	cat hostname.txt >>$@
-	cat cd.txt >>$@
+	cat $(firstword $^) >>$@
+	cat $(lastword $^) >>$@
 	test -s $@
 
 hostname.txt:
 	hostname | tr -d '\n\r\t' >$@
 	test -s $@
 
-rev-parse.txt:
+git-rev-parse-all.githash:
 	unset GIT_DIR; \
 	       	git -C .. rev-parse --all | uniq | tee $@
 	test -s $@
 
-ls-tree.txt: rev-parse.txt
+git-ls-tree.txt: git-rev-parse-all.githash
 	unset GIT_DIR; \
 	cat $< | xargs -n 1 git -C .. ls-tree | tee  $@
 	test -s $@
 
-relative-paths.txt:
-	(cd ..; find .) | sed -n -r 's/^\.+\/+//p' > $@
+all.relpaths:
+	find . | sed -n -r 's/^\.+\/+//p' > $@
 	test -s $@
 	wc $@
 
-file-urls.txt: leading-part.txt relative-paths.txt
-	cat relative-paths.txt | sed -n -r 's/^([^\/].+)$$/$(shell cat leading-part.txt)\/\1/p' >$@
+all.fileurls: root.fileurl all.relpaths
+	cat $(lastword $^)| sed -n -r 's#^([^\/].+)$$#$(shell cat $(firstword $^))/\1#p' >$@
+	@tail $@
 
-%.frcode: %.urllist
-	cat $< | sort | uniq | ${FRCODE} >$@
-	test -s $@
-
-%.urllist: %.frcode
-	locate -d $< "" > $@
-
-
->>>>>>> gist/master

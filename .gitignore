@@ -29,3 +29,7 @@ System*
 MobaXterm/
 file-catalog/
 *.pyc
+all.relpaths
+cd.dir
+root.fileurl
+all.fileurls

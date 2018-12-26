@@ -1,4 +1,4 @@
-import pathlib, time
+import pathlib, time, urllib.parse
 from computeGitHash import computeGitHashUtf8
 
 class Roots(dict):
@@ -15,4 +15,3 @@ class Roots(dict):
         if self.get(rootPathHash) is None:
             self[rootPathHash] = {}
         self[rootPath] = [self.now, rootPathHash]
-

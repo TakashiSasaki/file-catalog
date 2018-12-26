@@ -23,11 +23,6 @@ check-directories:
 	test -d ${OURS}
 	test -d ${THEIRS}
 
-git-config:
-	git config --system pager.reflog ""
-	git config --system pager.branch ""
-	git config --system pager.diff ""
-
 new-branch:
 	$(eval md5_1=$(shell dd if=/dev/random bs=8192 count=100 | md5sum | cut -d " " -f 1))
 	$(eval md5_2=$(shell dd if=/dev/random bs=8192 count=100 | md5sum | cut -d " " -f 1))
@@ -60,16 +55,6 @@ root.fileurl: hostname.txt cd.dir
 
 hostname.txt:
 	hostname | tr -d '\n\r\t' >$@
-	test -s $@
-
-git-rev-parse-all.githash:
-	unset GIT_DIR; \
-	       	git -C .. rev-parse --all | uniq | tee $@
-	test -s $@
-
-git-ls-tree.txt: git-rev-parse-all.githash
-	unset GIT_DIR; \
-	cat $< | xargs -n 1 git -C .. ls-tree | tee  $@
 	test -s $@
 
 all.relpaths:

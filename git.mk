@@ -20,3 +20,5 @@ git-config:
 	git config pager.diff ""
 	git config pager.reflog ""
 
+git-check-attr:
+	find . | git check-attr --stdin -a

@@ -106,3 +106,5 @@ var/
 venv.bak/
 venv/
 wheels/
+root.depth2.dirs
+root.dirs

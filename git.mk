@@ -3,7 +3,8 @@ git-all: .git-rev-parse-all \
 	.git-check-attr \
 	.git-config-remote \
 	.git-config-branch \
-	.gitdir
+	.git-dir \
+	.git-clean
 
 .git-rev-parse-all:
 	echo $@ merge=ours>>.gitattributes
@@ -55,12 +56,17 @@ git-config:
 	sort -u -o .gitignore .gitignore
 	git config -l | grep '^branch\.' | tee $@
 
-.gitdir:
+.git-dir:
 	echo $@ merge=ours>>.gitattributes
 	sort -u -o .gitattributes .gitattributes
 	echo $@ >>.gitignore
 	sort -u -o .gitignore .gitignore
 	git rev-parse --git-dir | tee $@
 
-
+.git-clean:
+	echo $@ merge=ours>>.gitattributes
+	sort -u -o .gitattributes .gitattributes
+	echo $@ >>.gitignore
+	sort -u -o .gitignore .gitignore
+	git clean -n -d -x | tee $@
 

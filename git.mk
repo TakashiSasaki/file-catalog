@@ -1,4 +1,7 @@
 git-all: .git-rev-parse-all \
+	.git-rev-parse-branches \
+	.git-rev-parse-tags \
+	.git-rev-parse-remotes \
 	.git-ls-tree \
 	.git-check-attr \
 	.git-config-remote \
@@ -15,13 +18,40 @@ git-all: .git-rev-parse-all \
 	       	git rev-parse --all | uniq | tee $@
 	test -s $@
 
+.git-rev-parse-branches:
+	echo $@ merge=ours>>.gitattributes
+	sort -u -o .gitattributes .gitattributes
+	echo $@ >>.gitignore
+	sort -u -o .gitignore .gitignore
+	unset GIT_DIR; \
+	       	git rev-parse --branches | uniq | tee $@
+	test -s $@
+
+.git-rev-parse-tags:
+	echo $@ merge=ours>>.gitattributes
+	sort -u -o .gitattributes .gitattributes
+	echo $@ >>.gitignore
+	sort -u -o .gitignore .gitignore
+	unset GIT_DIR; \
+	       	git rev-parse --tags | uniq | tee $@
+	-test -s $@
+
+.git-rev-parse-remotes:
+	echo $@ merge=ours>>.gitattributes
+	sort -u -o .gitattributes .gitattributes
+	echo $@ >>.gitignore
+	sort -u -o .gitignore .gitignore
+	unset GIT_DIR; \
+	       	git rev-parse --remotes| uniq | tee $@
+	test -s $@
+
 .git-ls-tree: .git-rev-parse-all
 	echo $@ merge=ours>>.gitattributes
 	sort -u -o .gitattributes .gitattributes
 	echo $@ >>.gitignore
 	sort -u -o .gitignore .gitignore
 	unset GIT_DIR; \
-	cat $< | xargs -n 1 git ls-tree | tee  $@
+	cat $< | xargs -n 1 git ls-tree -t -r --full-tree| sort -u -k 4 | tee  $@
 	test -s $@
 
 git-config:

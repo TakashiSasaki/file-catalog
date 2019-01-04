@@ -6,6 +6,9 @@
 .git-dir merge=ours
 .git-ls-tree merge=ours
 .git-rev-parse-all merge=ours
+.git-rev-parse-branches merge=ours
+.git-rev-parse-remotes merge=ours
+.git-rev-parse-tags merge=ours
 .gitdir merge=ours
 branch-local.txt	merge=ours
 date.txt	merge=ours

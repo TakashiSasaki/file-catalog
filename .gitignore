@@ -32,6 +32,9 @@ $RECYCLE.BIN/
 .git-dir
 .git-ls-tree
 .git-rev-parse-all
+.git-rev-parse-branches
+.git-rev-parse-remotes
+.git-rev-parse-tags
 .gitdir
 .hypothesis/
 .installed.cfg
@@ -99,6 +102,8 @@ pip-delete-this-directory.txt
 pip-log.txt
 relative-paths.txt
 rev-parse.txt
+root.depth2.dirs
+root.dirs
 root.fileurl
 sdist/
 target/
@@ -106,5 +111,3 @@ var/
 venv.bak/
 venv/
 wheels/
-root.depth2.dirs
-root.dirs

@@ -111,3 +111,9 @@ var/
 venv.bak/
 venv/
 wheels/
+root.depth.dirs.ldjson.md5.ldjson
+root.depth1.dirs
+root.depth1.dirs.json
+root.depth1.dirs.ldjson
+root.depth1.dirs.ldjson.md5.json
+root.depth1.dirs.x

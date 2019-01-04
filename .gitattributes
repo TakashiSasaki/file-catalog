@@ -1,7 +1,9 @@
 
 .git-check-attr merge=ours
+.git-clean merge=ours
 .git-config-branch merge=ours
 .git-config-remote merge=ours
+.git-dir merge=ours
 .git-ls-tree merge=ours
 .git-rev-parse-all merge=ours
 .gitdir merge=ours

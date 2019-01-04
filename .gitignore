@@ -26,8 +26,10 @@ $RECYCLE.BIN/
 .eggs/
 .env
 .git-check-attr
+.git-clean
 .git-config-branch
 .git-config-remote
+.git-dir
 .git-ls-tree
 .git-rev-parse-all
 .gitdir

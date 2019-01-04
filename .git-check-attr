@@ -1,0 +1,8 @@
+./.git-check-attr: merge: ours
+./.git-config-branch: merge: ours
+./.git-config-remote: merge: ours
+./.git-ls-tree: merge: ours
+./.git-rev-parse-all: merge: ours
+./.gitdir: merge: ours
+./branch-local.txt: merge: ours
+./date.txt: merge: ours

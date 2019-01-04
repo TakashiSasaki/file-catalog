@@ -22,3 +22,9 @@ git-config:
 
 git-check-attr:
 	find . | git check-attr --stdin -a
+
+git-config-remote.txt:
+	git config -l | grep '^remote\.' | tee $@
+
+git-config-branch.txt:
+	git config -l | grep '^branch\.' | tee $@

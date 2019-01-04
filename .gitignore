@@ -19,13 +19,18 @@ $RECYCLE.BIN/
 *.so
 *.spec
 *.swp
-*.swp
 .Python
 .cache
 .coverage
 .coverage.*
 .eggs/
 .env
+.git-check-attr
+.git-config-branch
+.git-config-remote
+.git-ls-tree
+.git-rev-parse-all
+.gitdir
 .hypothesis/
 .installed.cfg
 .ipynb_checkpoints
@@ -61,6 +66,7 @@ cd.dir
 cd.txt
 celerybeat-schedule
 coverage.xml
+date.txt
 db.sqlite3
 develop-eggs/
 dist/
@@ -74,6 +80,8 @@ file-catalog.json
 file-catalog/
 filelist.txt
 fileurl.txt
+git-config-branch.txt
+git-config-remote.txt
 hostname.txt
 htmlcov/
 instance/
@@ -96,6 +104,3 @@ var/
 venv.bak/
 venv/
 wheels/
-git-config-branch.txt
-git-config-remote.txt
-date.txt
